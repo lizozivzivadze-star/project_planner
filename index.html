@@ -35,8 +35,6 @@ body{font-family:var(--sans);background:var(--bg);color:var(--text);font-size:14
 .btn-ghost:hover{background:var(--bg3);color:var(--text2);border-color:var(--border)}
 .btn-danger{background:transparent;border-color:transparent;color:var(--red)}
 .btn-danger:hover{background:rgba(232,85,85,.1);border-color:rgba(232,85,85,.3)}
-.btn-gcal{background:rgba(62,207,142,.12);color:var(--green);border-color:rgba(62,207,142,.3)}
-.btn-gcal:hover{background:rgba(62,207,142,.22)}
 .btn-sm{padding:4px 9px;font-size:11px}
 .btn-xs{padding:2px 7px;font-size:10px}
 .btn-icon{padding:4px;width:26px;height:26px;justify-content:center;flex-shrink:0}
@@ -198,9 +196,7 @@ body{font-family:var(--sans);background:var(--bg);color:var(--text);font-size:14
     <span class="save-badge" id="saveBadge">●</span>
     <button class="btn btn-sm" onclick="exportJSON()">↓ JSON</button>
     <label class="btn btn-sm" style="cursor:pointer">↑ Import<input type="file" accept=".json" style="display:none" onchange="importJSON(event)"></label>
-    <button class="btn btn-sm btn-gcal" onclick="exportToGCal()" id="gcalBtn">📅 Google Calendar</button>
     <button class="btn btn-sm" style="background:rgba(155,109,255,.15);color:var(--purple);border-color:rgba(155,109,255,.3)" onclick="exportPDF()">⬇ Download summary</button>
-    <button class="btn btn-sm" onclick="switchView('help',null)">? Help</button>
   </div>
 </div>
 
@@ -713,56 +709,6 @@ function pertUpd(i,f,v){proj().pert[i][f]=v;saveStore();renderPert();}
 function pertDel(i){proj().pert.splice(i,1);saveStore();renderPert();}
 function pertAdd(){const sel=document.getElementById('pertAddSel');if(!sel||!sel.value)return;proj().pert.push({taskId:sel.value,a:1,m:3,b:6});saveStore();renderPert();}
 
-// ── GOOGLE CALENDAR EXPORT ───────────────────────────────────────────────────
-async function exportToGCal(){
-  const p=proj();
-  if(!p.startDate){alert('Please set a project start date in the WBS view first — otherwise we cannot calculate real calendar dates for each task.');return;}
-  const sched=computeSched();
-  const btn=document.getElementById('gcalBtn');
-  btn.textContent='📅 Exporting…';btn.disabled=true;
-
-  const tasks=p.tasks.filter(t=>sched.esD[t.id]&&sched.efD[t.id]);
-  let created=0,failed=0;
-
-  for(const t of tasks){
-    const startIso=isoDate(sched.esD[t.id]);
-    // Google Calendar all-day events need end = day after last day
-    const endDate=new Date(sched.efD[t.id]);endDate.setDate(endDate.getDate()+1);
-    const endIso=isoDate(endDate);
-    const desc=[
-      `Project: ${p.name}`,
-      `Phase: ${(getPhase(t.phaseId)||{name:'—'}).name}`,
-      `Duration: ${t.days} working days`,
-      `Status: ${t.status}`,
-      t.cp?'⚡ Critical path task':'',
-      t.deps&&t.deps.length?`Depends on: ${t.deps.join(', ')}` : '',
-      t.notes?`Notes: ${t.notes}`:'',
-    ].filter(Boolean).join('\n');
-
-    try{
-      const res=await fetch('https://calendarmcp.googleapis.com/mcp/v1',{
-        method:'POST',
-        headers:{'Content-Type':'application/json'},
-        body:JSON.stringify({
-          jsonrpc:'2.0',id:1,method:'tools/call',
-          params:{name:'create_event',arguments:{
-            summary:`[${p.name.substring(0,20)}] ${t.name}`,
-            description:desc,
-            start:{date:startIso},
-            end:{date:endIso},
-            colorId: t.cp?'11':(t.status==='done'?'2':'1')
-          }}
-        })
-      });
-      if(res.ok)created++;else failed++;
-    }catch(e){failed++;}
-  }
-
-  btn.textContent='📅 Google Calendar';btn.disabled=false;
-  if(failed===0)alert(`✅ ${created} tasks exported to Google Calendar!`);
-  else alert(`Exported ${created} tasks. ${failed} failed — you may need to re-authenticate Google Calendar in your Claude settings.`);
-}
-
 // ── PROJECTS ──────────────────────────────────────────────────────────────────
 function renderProjects(){
   let cards=store.projects.map(p=>{
@@ -941,11 +887,6 @@ function renderHelp(){
       <li>The probability bars at the bottom sum up all CP task durations and variances to give the total project length with confidence levels. "95th percentile" means you are 95% confident the project finishes by that day.</li>
     </ul>
     <div class="tip">The wider the gap between your 50% and 95% dates, the more uncertain your schedule is — consider reducing scope or adding buffer to those tasks.</div>
-  </div>
-
-  <div class="help-section">
-    <h4>GOOGLE CALENDAR EXPORT</h4>
-    <p>Click <strong>📅 Google Calendar</strong> in the top bar to push all tasks as calendar events. Each task becomes an all-day event spanning its scheduled start and finish dates. CP tasks are highlighted in red, completed tasks in green. You must set a project start date first, and have Google Calendar connected in your Claude settings.</p>
   </div>
 
   <div class="help-section">
