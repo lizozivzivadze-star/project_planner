@@ -10,16 +10,14 @@
 *{box-sizing:border-box;margin:0;padding:0}
 body{font-family:var(--sans);background:var(--bg);color:var(--text);font-size:14px;min-height:100vh;overflow:hidden}
 .app{display:grid;grid-template-rows:52px 1fr;height:100vh}
-/* topbar */
 .topbar{display:flex;align-items:center;gap:10px;padding:0 20px;border-bottom:1px solid var(--border);background:var(--bg2);z-index:10}
 .logo{font-family:var(--mono);font-size:12px;font-weight:500;color:var(--accent);letter-spacing:.08em;white-space:nowrap}
-.proj-switcher{display:flex;align-items:center;gap:6px;background:var(--bg3);border:1px solid var(--border2);border-radius:var(--r);padding:4px 10px;cursor:pointer;font-size:12px;color:var(--text);min-width:0;max-width:220px}
+.proj-switcher{display:flex;align-items:center;gap:6px;background:var(--bg3);border:1px solid var(--border2);border-radius:var(--r);padding:4px 10px;cursor:pointer;font-size:12px;color:var(--text);min-width:0;max-width:200px}
 .proj-switcher span{overflow:hidden;text-overflow:ellipsis;white-space:nowrap;flex:1}
 .proj-switcher:hover{border-color:var(--accent);color:var(--accent)}
 .topbar-right{margin-left:auto;display:flex;gap:6px;align-items:center}
 .save-badge{font-size:10px;font-family:var(--mono);color:var(--text3);padding:3px 8px;border-radius:4px}
 .save-badge.ok{color:var(--green)}
-/* layout */
 .main{display:grid;grid-template-columns:200px 1fr;overflow:hidden}
 .sidebar{background:var(--bg2);border-right:1px solid var(--border);display:flex;flex-direction:column;overflow-y:auto}
 .nav-sec{padding:14px 16px 5px;font-size:9px;font-family:var(--mono);letter-spacing:.1em;color:var(--text3);text-transform:uppercase}
@@ -29,7 +27,6 @@ body{font-family:var(--sans);background:var(--bg);color:var(--text);font-size:14
 .nav-item .nav-count{margin-left:auto;font-size:9px;font-family:var(--mono);color:var(--text3)}
 .sidebar-footer{margin-top:auto;padding:10px;border-top:1px solid var(--border)}
 .content{overflow-y:auto;padding:24px 28px;position:relative}
-/* buttons */
 .btn{display:inline-flex;align-items:center;gap:5px;padding:6px 13px;border-radius:var(--r);border:1px solid var(--border2);background:var(--bg3);color:var(--text2);font-size:12px;font-family:var(--sans);cursor:pointer;transition:all .12s;white-space:nowrap}
 .btn:hover{background:var(--bg4);color:var(--text);border-color:rgba(255,255,255,.2)}
 .btn-primary{background:var(--accent);color:#fff;border-color:var(--accent)}
@@ -38,72 +35,92 @@ body{font-family:var(--sans);background:var(--bg);color:var(--text);font-size:14
 .btn-ghost:hover{background:var(--bg3);color:var(--text2);border-color:var(--border)}
 .btn-danger{background:transparent;border-color:transparent;color:var(--red)}
 .btn-danger:hover{background:rgba(232,85,85,.1);border-color:rgba(232,85,85,.3)}
-.btn-green{background:rgba(62,207,142,.15);color:var(--green);border-color:rgba(62,207,142,.3)}
-.btn-green:hover{background:rgba(62,207,142,.25)}
+.btn-gcal{background:rgba(62,207,142,.12);color:var(--green);border-color:rgba(62,207,142,.3)}
+.btn-gcal:hover{background:rgba(62,207,142,.22)}
 .btn-sm{padding:4px 9px;font-size:11px}
 .btn-xs{padding:2px 7px;font-size:10px}
 .btn-icon{padding:4px;width:26px;height:26px;justify-content:center;flex-shrink:0}
-/* badges */
 .badge{display:inline-flex;align-items:center;padding:2px 6px;border-radius:3px;font-size:9px;font-family:var(--mono);font-weight:500;letter-spacing:.03em}
 .badge-cp{background:rgba(79,142,247,.15);color:#7fb0fa;border:1px solid rgba(79,142,247,.3)}
-.badge-done{background:rgba(62,207,142,.12);color:var(--green);border:1px solid rgba(62,207,142,.25)}
 .badge-example{background:rgba(245,166,35,.1);color:var(--amber);border:1px solid rgba(245,166,35,.25)}
-/* progress */
 .progress-bar{height:4px;border-radius:2px;background:var(--bg3);overflow:hidden;margin:6px 0}
 .progress-fill{height:100%;border-radius:2px;background:linear-gradient(90deg,var(--accent),var(--green));transition:width .3s}
-/* metrics */
 .metrics{display:grid;grid-template-columns:repeat(4,1fr);gap:10px;margin-bottom:20px}
 .metric{background:var(--bg2);border:1px solid var(--border);border-radius:var(--rl);padding:14px}
 .metric-val{font-family:var(--mono);font-size:26px;font-weight:500}
 .metric-lbl{font-size:10px;color:var(--text3);margin-top:3px;text-transform:uppercase;letter-spacing:.05em}
-/* page header */
 .ph{display:flex;align-items:center;justify-content:space-between;margin-bottom:20px;flex-wrap:wrap;gap:8px}
 .ph-title{font-size:17px;font-weight:500}
-.ph-actions{display:flex;gap:6px}
-/* WBS */
+.ph-actions{display:flex;gap:6px;flex-wrap:wrap}
+
+/* ── Phase ring + header ── */
 .wbs-phase{background:var(--bg2);border:1px solid var(--border);border-radius:var(--rl);margin-bottom:8px;overflow:visible}
 .wbs-ph-hdr{display:flex;align-items:center;gap:8px;padding:10px 14px;cursor:pointer;user-select:none;border-radius:var(--rl)}
 .wbs-ph-hdr:hover{background:var(--bg3)}
-.phase-dot{width:8px;height:8px;border-radius:50%;flex-shrink:0}
+.phase-ring-wrap{position:relative;width:28px;height:28px;flex-shrink:0}
+.phase-ring-wrap svg{position:absolute;top:0;left:0;transform:rotate(-90deg)}
+.phase-ring-dot{width:8px;height:8px;border-radius:50%;position:absolute;top:50%;left:50%;transform:translate(-50%,-50%)}
 .phase-name-edit{background:transparent;border:none;font-size:13px;font-weight:500;color:var(--text);font-family:var(--sans);flex:1;min-width:0;cursor:text;padding:0}
 .phase-name-edit:focus{outline:1px solid var(--accent);border-radius:3px;background:var(--bg3);padding:1px 4px}
 .phase-meta{font-size:10px;color:var(--text3);font-family:var(--mono);white-space:nowrap}
 .exp-icon{color:var(--text3);font-size:9px;transition:transform .15s;flex-shrink:0}
 .exp-icon.open{transform:rotate(90deg)}
+
+/* ── Phase notes ── */
+.phase-notes-area{padding:4px 14px 10px 50px}
+.phase-notes-input{width:100%;background:transparent;border:none;border-bottom:1px solid var(--border);font-size:11px;color:var(--text2);font-family:var(--sans);font-style:italic;padding:4px 0;resize:none;line-height:1.5}
+.phase-notes-input:focus{outline:none;border-bottom-color:var(--accent);color:var(--text)}
+.phase-notes-input::placeholder{color:var(--text3)}
+
+/* ── Task rows ── */
 .wbs-tasks{padding:0 10px 8px 10px}
-.wbs-task{display:flex;align-items:center;gap:7px;padding:6px 10px;border-radius:var(--r);margin-bottom:2px}
+.wbs-task{display:flex;align-items:center;gap:7px;padding:6px 10px;border-radius:var(--r);margin-bottom:2px;cursor:grab;position:relative}
 .wbs-task:hover{background:var(--bg3)}
 .wbs-task.done .task-name-edit{text-decoration:line-through;color:var(--text3)}
+.wbs-task.drag-over{border-top:2px solid var(--accent);border-radius:0}
+.wbs-task.dragging{opacity:.4;cursor:grabbing}
+.drag-handle{color:var(--text3);font-size:12px;cursor:grab;flex-shrink:0;opacity:0;transition:opacity .1s;user-select:none;padding:0 2px}
+.wbs-task:hover .drag-handle{opacity:1}
 .task-check{appearance:none;width:14px;height:14px;border:1px solid var(--border2);border-radius:3px;cursor:pointer;flex-shrink:0;background:transparent;position:relative}
 .task-check:checked{background:var(--green);border-color:var(--green)}
 .task-check:checked::after{content:'✓';position:absolute;top:-1px;left:1px;font-size:10px;color:#000;font-weight:700}
+.task-check.inprogress{border-color:var(--amber);background:rgba(245,166,35,.15)}
 .task-id-lbl{font-family:var(--mono);font-size:9px;color:var(--text3);width:24px;flex-shrink:0}
 .task-name-edit{background:transparent;border:none;font-size:12px;color:var(--text);font-family:var(--sans);flex:1;min-width:60px;cursor:text;padding:0}
 .task-name-edit:focus{outline:1px solid var(--accent);border-radius:3px;background:var(--bg3);padding:1px 4px}
+.task-name-edit.inprogress{color:var(--amber)}
 .task-days-pill{display:inline-flex;align-items:center;gap:3px;background:var(--bg3);border:1px solid var(--border);border-radius:4px;padding:2px 7px;font-family:var(--mono);font-size:10px;color:var(--text2);cursor:pointer;white-space:nowrap;flex-shrink:0;transition:border-color .12s}
 .task-days-pill:hover{border-color:var(--accent);color:var(--accent)}
-.task-days-pill .pill-icon{font-size:9px;opacity:.6}
-.task-status-dot{width:6px;height:6px;border-radius:50%;flex-shrink:0}
-.task-notes-row{padding:2px 10px 4px 52px;font-size:11px;color:var(--text3);font-style:italic}
-/* Gantt */
+.task-date-chip{display:inline-flex;align-items:center;gap:3px;font-family:var(--mono);font-size:9px;color:var(--text3);white-space:nowrap;flex-shrink:0}
+.task-date-chip.overdue{color:var(--red)}
+.task-date-chip.today{color:var(--amber)}
+.task-date-chip.upcoming{color:var(--green)}
+.task-notes-row{padding:2px 10px 4px 76px;font-size:11px;color:var(--text3);font-style:italic}
+
+/* ── Status dot ── */
+.status-dot{width:7px;height:7px;border-radius:50%;flex-shrink:0}
+
+/* ── Gantt ── */
 .gantt-outer{background:var(--bg2);border:1px solid var(--border);border-radius:var(--rl);overflow:hidden}
 .g-hdr{display:flex;border-bottom:1px solid var(--border2);background:var(--bg3)}
 .g-name-col{width:190px;flex-shrink:0;padding:8px 14px;font-size:9px;font-family:var(--mono);color:var(--text3);text-transform:uppercase;letter-spacing:.06em;border-right:1px solid var(--border)}
 .g-bar-area{flex:1;position:relative;overflow:hidden}
-.g-ticks{display:flex;height:30px;position:relative}
-.g-tick{position:absolute;top:0;display:flex;flex-direction:column;align-items:center}
-.g-tick-line{width:1px;height:18px;background:var(--border)}
-.g-tick-lbl{font-size:8px;font-family:var(--mono);color:var(--text3);margin-top:2px}
 .g-body{overflow-x:hidden}
 .g-ph-row{display:flex;align-items:center;border-bottom:1px solid rgba(255,255,255,.04);background:rgba(255,255,255,.015)}
 .g-task-row{display:flex;align-items:center;border-bottom:1px solid rgba(255,255,255,.03);transition:background .1s}
 .g-task-row:hover{background:rgba(255,255,255,.02)}
-.g-task-row.done-row .g-bar{opacity:.4}
+.g-task-row.done-row .g-bar{opacity:.5}
 .g-name{width:190px;flex-shrink:0;padding:5px 14px;font-size:11px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;border-right:1px solid var(--border)}
 .g-ph-name{font-weight:500;font-size:11px}
-.g-bar-wrap{flex:1;position:relative;height:24px}
-.g-bar{position:absolute;height:14px;top:5px;border-radius:3px;display:flex;align-items:center;padding:0 5px;font-size:8px;font-family:var(--mono);color:rgba(255,255,255,.9);white-space:nowrap;overflow:hidden;min-width:2px;transition:opacity .2s}
-/* PERT */
+.g-bar-wrap{flex:1;position:relative;height:28px}
+.g-bar{position:absolute;height:14px;top:7px;border-radius:3px;display:flex;align-items:center;padding:0 5px;font-size:8px;font-family:var(--mono);color:rgba(255,255,255,.9);white-space:nowrap;overflow:hidden;min-width:2px}
+.g-today-line{position:absolute;top:0;bottom:0;width:1px;background:rgba(245,166,35,.6);z-index:2;pointer-events:none}
+.g-today-lbl{position:absolute;top:2px;font-size:8px;font-family:var(--mono);color:var(--amber);background:var(--bg3);padding:0 3px;border-radius:2px;white-space:nowrap;z-index:2}
+.g-date-lbl{position:absolute;top:0;display:flex;flex-direction:column;align-items:center}
+.g-date-line{width:1px;height:16px;background:var(--border)}
+.g-date-txt{font-size:8px;font-family:var(--mono);color:var(--text3);margin-top:2px;white-space:nowrap}
+
+/* ── PERT ── */
 .pert-tbl{width:100%;border-collapse:collapse;font-size:12px}
 .pert-tbl th{padding:9px 10px;text-align:left;font-size:9px;font-family:var(--mono);letter-spacing:.08em;color:var(--text3);text-transform:uppercase;border-bottom:1px solid var(--border2);background:var(--bg3)}
 .pert-tbl td{padding:7px 10px;border-bottom:1px solid var(--border);vertical-align:middle}
@@ -121,7 +138,8 @@ body{font-family:var(--sans);background:var(--bg);color:var(--text);font-size:14
 .prob-bar-o{flex:1;height:5px;border-radius:3px;background:var(--bg3);overflow:hidden}
 .prob-bar-i{height:100%;border-radius:3px;background:linear-gradient(90deg,var(--accent),var(--green))}
 .prob-pct{font-family:var(--mono);font-size:10px;color:var(--text2);width:36px;text-align:right}
-/* Modal */
+
+/* ── Modal ── */
 .overlay{position:fixed;inset:0;background:rgba(0,0,0,.7);z-index:200;display:flex;align-items:center;justify-content:center;opacity:0;pointer-events:none;transition:opacity .18s}
 .overlay.open{opacity:1;pointer-events:all}
 .modal{background:var(--bg2);border:1px solid var(--border2);border-radius:var(--rl);padding:22px;width:480px;max-width:96vw;transform:translateY(6px);transition:transform .18s;max-height:90vh;overflow-y:auto}
@@ -138,7 +156,8 @@ body{font-family:var(--sans);background:var(--bg);color:var(--text);font-size:14
 .color-row{display:flex;gap:5px;flex-wrap:wrap}
 .cswatch{width:22px;height:22px;border-radius:50%;cursor:pointer;border:2px solid transparent}
 .cswatch.sel{border-color:#fff}
-/* Projects panel */
+
+/* ── Projects panel ── */
 .proj-card{background:var(--bg3);border:1px solid var(--border);border-radius:var(--rl);padding:14px;margin-bottom:8px;cursor:pointer;transition:border-color .12s;position:relative}
 .proj-card:hover{border-color:var(--border2)}
 .proj-card.current{border-color:var(--accent)}
@@ -146,25 +165,20 @@ body{font-family:var(--sans);background:var(--bg);color:var(--text);font-size:14
 .proj-card-meta{font-size:11px;color:var(--text3)}
 .proj-card-actions{position:absolute;top:10px;right:10px;display:flex;gap:4px;opacity:0;transition:opacity .1s}
 .proj-card:hover .proj-card-actions{opacity:1}
-/* Help */
+
+/* ── gcal status ── */
+.gcal-status{font-size:11px;padding:8px 12px;border-radius:var(--r);margin-top:10px;display:none}
+.gcal-status.show{display:block}
+.gcal-status.loading{background:rgba(79,142,247,.1);color:var(--accent)}
+.gcal-status.success{background:rgba(62,207,142,.1);color:var(--green)}
+.gcal-status.error{background:rgba(232,85,85,.1);color:var(--red)}
+
+/* ── Help ── */
 .help-section{margin-bottom:20px}
 .help-section h4{font-size:12px;font-weight:500;color:var(--accent);margin-bottom:8px;font-family:var(--mono)}
 .help-section p,.help-section li{font-size:12px;color:var(--text2);line-height:1.7}
 .help-section ul{padding-left:16px}
 .help-section .tip{background:var(--bg3);border-left:2px solid var(--accent);padding:8px 12px;border-radius:0 var(--r) var(--r) 0;font-size:11px;color:var(--text2);margin:6px 0}
-/* Print / export */
-@media print{
-  body{background:#fff;color:#000;overflow:visible}
-  .app{display:block;height:auto}
-  .topbar,.sidebar,.btn,.ph-actions,.wbs-ph-hdr .btn,.wbs-task .btn,.sidebar,.nav-item{display:none!important}
-  .main{display:block}
-  .content{overflow:visible;padding:12px}
-  .export-section{page-break-after:always}
-  .no-print{display:none!important}
-  .gantt-outer,.wbs-phase,.pert-tbl,.result-card{border:1px solid #ccc!important;background:#fff!important}
-  .g-bar{-webkit-print-color-adjust:exact;print-color-adjust:exact}
-  *{color-adjust:exact}
-}
 .formula-box{background:var(--bg3);border:1px solid var(--border);border-radius:var(--r);padding:10px 14px;font-family:var(--mono);font-size:11px;color:var(--text2);margin:10px 0}
 .scrolltbl{overflow-x:auto;background:var(--bg2);border:1px solid var(--border);border-radius:var(--rl)}
 .sep{border:none;border-top:1px solid var(--border);margin:18px 0}
@@ -184,7 +198,8 @@ body{font-family:var(--sans);background:var(--bg);color:var(--text);font-size:14
     <span class="save-badge" id="saveBadge">●</span>
     <button class="btn btn-sm" onclick="exportJSON()">↓ JSON</button>
     <label class="btn btn-sm" style="cursor:pointer">↑ Import<input type="file" accept=".json" style="display:none" onchange="importJSON(event)"></label>
-    <button class="btn btn-sm btn-green" onclick="exportPDF()">⬇ Download summary</button>
+    <button class="btn btn-sm btn-gcal" onclick="exportToGCal()" id="gcalBtn">📅 Google Calendar</button>
+    <button class="btn btn-sm" style="background:rgba(155,109,255,.15);color:var(--purple);border-color:rgba(155,109,255,.3)" onclick="exportPDF()">⬇ Download summary</button>
     <button class="btn btn-sm" onclick="switchView('help',null)">? Help</button>
   </div>
 </div>
@@ -218,7 +233,6 @@ body{font-family:var(--sans);background:var(--bg);color:var(--text);font-size:14
       <button class="btn btn-ghost btn-sm" style="width:100%;justify-content:center;color:var(--text3)" onclick="switchView('help',null)">📖 User guide</button>
     </div>
   </div>
-
   <div class="content" id="content"></div>
 </div>
 </div>
@@ -241,7 +255,7 @@ body{font-family:var(--sans);background:var(--bg);color:var(--text);font-size:14
       <option value="done">Done</option>
     </select>
   </div>
-  <div class="fl"><label class="fcheck"><input type="checkbox" id="tf-cp"> Mark as critical path</label></div>
+  <div class="fl"><label class="fcheck"><input type="checkbox" id="tf-cp"> Mark as critical path (CP)</label></div>
   <div class="fa">
     <button class="btn btn-danger btn-sm" id="tf-delete-btn" style="margin-right:auto;display:none" onclick="deleteTaskFromModal()">Delete task</button>
     <button class="btn" onclick="closeModal('taskModal')">Cancel</button>
@@ -283,26 +297,25 @@ body{font-family:var(--sans);background:var(--bg);color:var(--text);font-size:14
 </div>
 
 <script>
-// ── CONSTANTS ────────────────────────────────────────────────────────────────
-const SK = 'planify_v2';
-const COLORS = ['#4f8ef7','#3ecf8e','#f5a623','#e85555','#9b6dff','#e879f9','#38bdf8','#fb923c','#a3e635','#f472b6'];
-const STATUS_COLORS = {todo:'#606072',inprogress:'#f5a623',done:'#3ecf8e'};
-const EXAMPLE_PROJECT = {
-  id:'proj_example',
-  name:'Vision system integration (example)',
-  isExample:true,
-  created: Date.now(),
+const SK='planify_v3';
+const COLORS=['#4f8ef7','#3ecf8e','#f5a623','#e85555','#9b6dff','#e879f9','#38bdf8','#fb923c','#a3e635','#f472b6'];
+const STATUS_COLORS={todo:'#606072',inprogress:'#f5a623',done:'#3ecf8e'};
+const TODAY=new Date();TODAY.setHours(0,0,0,0);
+
+const EXAMPLE_PROJECT={
+  id:'proj_example',name:'Vision system integration (example)',isExample:true,created:Date.now(),
+  startDate:'2025-09-01',skipWeekends:true,
   phases:[
-    {id:'P1',name:'Requirements & planning',color:'#4f8ef7',expanded:true},
-    {id:'P2',name:'Hardware procurement',color:'#3ecf8e',expanded:true},
-    {id:'P3',name:'Software development',color:'#f5a623',expanded:true},
-    {id:'P4',name:'Integration & testing',color:'#e85555',expanded:true},
-    {id:'P5',name:'Deployment & handover',color:'#9b6dff',expanded:true},
+    {id:'P1',name:'Requirements & planning',color:'#4f8ef7',expanded:true,notes:'Define what the system must detect, who uses it, and what "good enough" looks like.'},
+    {id:'P2',name:'Hardware procurement',color:'#3ecf8e',expanded:true,notes:'Lead times can be long — order early. Check stock before finalising specs.'},
+    {id:'P3',name:'Software development',color:'#f5a623',expanded:true,notes:''},
+    {id:'P4',name:'Integration & testing',color:'#e85555',expanded:true,notes:''},
+    {id:'P5',name:'Deployment & handover',color:'#9b6dff',expanded:true,notes:''},
   ],
   tasks:[
-    {id:'T1',name:'Define system specs',phaseId:'P1',days:3,cp:true,deps:[],status:'todo',notes:''},
-    {id:'T2',name:'Stakeholder review',phaseId:'P1',days:2,cp:false,deps:['T1'],status:'todo',notes:''},
-    {id:'T3',name:'Risk assessment',phaseId:'P1',days:2,cp:false,deps:['T1'],status:'todo',notes:''},
+    {id:'T1',name:'Define system specs',phaseId:'P1',days:3,cp:true,deps:[],status:'done',notes:''},
+    {id:'T2',name:'Stakeholder review',phaseId:'P1',days:2,cp:false,deps:['T1'],status:'done',notes:''},
+    {id:'T3',name:'Risk assessment',phaseId:'P1',days:2,cp:false,deps:['T1'],status:'inprogress',notes:''},
     {id:'T4',name:'Select camera & optics',phaseId:'P2',days:4,cp:true,deps:['T2'],status:'todo',notes:''},
     {id:'T5',name:'Order components',phaseId:'P2',days:5,cp:true,deps:['T4'],status:'todo',notes:''},
     {id:'T6',name:'Receive & inspect',phaseId:'P2',days:2,cp:true,deps:['T5'],status:'todo',notes:''},
@@ -326,72 +339,96 @@ const EXAMPLE_PROJECT = {
   ]
 };
 
-// ── STATE ─────────────────────────────────────────────────────────────────────
-let store = loadStore();
-let currentView = 'wbs';
-let editingTaskId = null;
-let editingPhaseId = null;
-let selectedColor = COLORS[0];
+let store=loadStore();
+let currentView='wbs';
+let editingTaskId=null,editingPhaseId=null,selectedColor=COLORS[0];
+let dragSrcTask=null,dragSrcPhase=null;
 
-function loadStore() {
-  try { const r = localStorage.getItem(SK); if (r) return JSON.parse(r); } catch(e){}
-  const ex = JSON.parse(JSON.stringify(EXAMPLE_PROJECT));
-  return { currentProjectId: ex.id, projects: [ex] };
+function loadStore(){
+  try{const r=localStorage.getItem(SK);if(r)return JSON.parse(r);}catch(e){}
+  // migrate from old key
+  try{const old=localStorage.getItem('planify_v2');if(old){const d=JSON.parse(old);d.projects&&d.projects.forEach(p=>{if(!p.startDate)p.startDate='';if(!p.skipWeekends)p.skipWeekends=true;p.phases&&p.phases.forEach(ph=>{if(!ph.notes)ph.notes='';});p.tasks&&p.tasks.forEach(t=>{if(!t.order)t.order=0;});});return d;}}catch(e){}
+  const ex=JSON.parse(JSON.stringify(EXAMPLE_PROJECT));
+  return{currentProjectId:ex.id,projects:[ex]};
 }
-function saveStore() {
-  try {
-    localStorage.setItem(SK, JSON.stringify(store));
-    const el = document.getElementById('saveBadge');
-    if (el){el.textContent='✓ saved';el.className='save-badge ok';setTimeout(()=>{el.textContent='●';el.className='save-badge';},1200);}
-  } catch(e){}
+function saveStore(){
+  try{localStorage.setItem(SK,JSON.stringify(store));const el=document.getElementById('saveBadge');if(el){el.textContent='✓ saved';el.className='save-badge ok';setTimeout(()=>{el.textContent='●';el.className='save-badge';},1200);}}catch(e){}
 }
 
-function proj() { return store.projects.find(p=>p.id===store.currentProjectId) || store.projects[0]; }
-function getPhase(id) { return proj().phases.find(p=>p.id===id); }
-function getTask(id) { return proj().tasks.find(t=>t.id===id); }
-function nextTid() { const ns=proj().tasks.map(t=>parseInt(t.id.replace('T',''))||0); return 'T'+(Math.max(0,...ns)+1); }
-function nextPid() { const ns=proj().phases.map(p=>parseInt(p.id.replace('P',''))||0); return 'P'+(Math.max(0,...ns)+1); }
+function proj(){return store.projects.find(p=>p.id===store.currentProjectId)||store.projects[0];}
+function getPhase(id){return proj().phases.find(p=>p.id===id);}
+function getTask(id){return proj().tasks.find(t=>t.id===id);}
+function nextTid(){const ns=proj().tasks.map(t=>parseInt(t.id.replace('T',''))||0);return 'T'+(Math.max(0,...ns)+1);}
+function nextPid(){const ns=proj().phases.map(p=>parseInt(p.id.replace('P',''))||0);return 'P'+(Math.max(0,...ns)+1);}
 
-function computeSched() {
-  const es={},ef={};
-  function getEF(id){
-    if(ef[id]!==undefined)return ef[id];
+// ── CALENDAR HELPERS ────────────────────────────────────────────────────────
+function addWorkdays(date,days,skipWeekends){
+  let d=new Date(date);let added=0;
+  while(added<days){d.setDate(d.getDate()+1);if(skipWeekends&&(d.getDay()===0||d.getDay()===6))continue;added++;}
+  return d;
+}
+function workdaysBetween(a,b,skipWeekends){
+  let d=new Date(a);let count=0;
+  while(d<b){d.setDate(d.getDate()+1);if(skipWeekends&&(d.getDay()===0||d.getDay()===6))continue;count++;}
+  return count;
+}
+function fmtDate(d){return d.toLocaleDateString('en-GB',{day:'numeric',month:'short'});}
+function isoDate(d){return d.toISOString().split('T')[0];}
+
+function computeSched(){
+  const p=proj();
+  const hasStart=p.startDate&&p.startDate.length===10;
+  const startDate=hasStart?new Date(p.startDate):null;
+  if(startDate)startDate.setHours(0,0,0,0);
+  const skip=p.skipWeekends!==false;
+  const esD={},efD={},esDays={},efDays={};
+
+  function getEFdays(id){
+    if(efDays[id]!==undefined)return efDays[id];
     const t=getTask(id);if(!t)return 0;
-    let mx=0;(t.deps||[]).forEach(d=>{mx=Math.max(mx,getEF(d));});
-    es[id]=mx;ef[id]=mx+t.days;return ef[id];
+    let mx=0;(t.deps||[]).forEach(d=>{mx=Math.max(mx,getEFdays(d));});
+    esDays[id]=mx;efDays[id]=mx+t.days;return efDays[id];
   }
-  proj().tasks.forEach(t=>getEF(t.id));
-  const total=proj().tasks.length?Math.max(0,...proj().tasks.map(t=>ef[t.id]||0)):0;
-  return{es,ef,total};
+  p.tasks.forEach(t=>getEFdays(t.id));
+  const totalDays=p.tasks.length?Math.max(0,...p.tasks.map(t=>efDays[t.id]||0)):0;
+
+  if(startDate){
+    // Convert day offsets to actual calendar dates
+    p.tasks.forEach(t=>{
+      let s=new Date(startDate);let added=0;
+      while(added<esDays[t.id]){s.setDate(s.getDate()+1);if(skip&&(s.getDay()===0||s.getDay()===6))continue;added++;}
+      esD[t.id]=new Date(s);
+      let e=new Date(s);added=0;
+      while(added<t.days){e.setDate(e.getDate()+1);if(skip&&(e.getDay()===0||e.getDay()===6))continue;added++;}
+      efD[t.id]=new Date(e);
+    });
+  }
+  return{esDays,efDays,esD,efD,totalDays,startDate,skip};
 }
 
-// ── VIEWS ─────────────────────────────────────────────────────────────────────
-function switchView(view, el) {
-  currentView = view;
+// ── NAV ────────────────────────────────────────────────────────────────────
+function switchView(view,el){
+  currentView=view;
   document.querySelectorAll('.nav-item').forEach(n=>n.classList.remove('active'));
-  const navEl = document.getElementById('nav-'+view);
-  if(navEl) navEl.classList.add('active');
-  if(el && !el.id) el.classList.add('active');
+  const navEl=document.getElementById('nav-'+view);if(navEl)navEl.classList.add('active');
+  if(el&&!el.id)el.classList.add('active');
   render();
 }
-
-function render() {
+function render(){
   updateSidebar();
-  document.getElementById('topProjName').textContent = proj() ? proj().name : '—';
-  if(currentView==='wbs') renderWBS();
-  else if(currentView==='gantt') renderGantt();
-  else if(currentView==='pert') renderPert();
-  else if(currentView==='projects') renderProjects();
-  else if(currentView==='help') renderHelp();
+  document.getElementById('topProjName').textContent=proj()?proj().name:'—';
+  if(currentView==='wbs')renderWBS();
+  else if(currentView==='gantt')renderGantt();
+  else if(currentView==='pert')renderPert();
+  else if(currentView==='projects')renderProjects();
+  else if(currentView==='help')renderHelp();
 }
-
-function updateSidebar() {
-  const p = proj();
-  if(!p){document.getElementById('sidePhases').innerHTML='';return;}
-  document.getElementById('sidePhases').innerHTML = p.phases.map(ph=>{
+function updateSidebar(){
+  const p=proj();if(!p){document.getElementById('sidePhases').innerHTML='';return;}
+  document.getElementById('sidePhases').innerHTML=p.phases.map(ph=>{
     const cnt=p.tasks.filter(t=>t.phaseId===ph.id).length;
     const done=p.tasks.filter(t=>t.phaseId===ph.id&&t.status==='done').length;
-    return `<div class="nav-item" onclick="switchView('wbs',this)">
+    return`<div class="nav-item" onclick="switchView('wbs',this)">
       <span style="width:6px;height:6px;border-radius:50%;background:${ph.color};flex-shrink:0"></span>
       <span style="flex:1;font-size:11px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap">${ph.name}</span>
       <span class="nav-count">${done}/${cnt}</span>
@@ -399,56 +436,100 @@ function updateSidebar() {
   }).join('');
 }
 
-// ── WBS ──────────────────────────────────────────────────────────────────────
-function renderWBS() {
-  const p = proj(); if(!p){document.getElementById('content').innerHTML='<div class="empty">No project selected.</div>';return;}
-  const sched = computeSched();
-  const total=p.tasks.length, done=p.tasks.filter(t=>t.status==='done').length, cp=p.tasks.filter(t=>t.cp).length;
-  const pct = total ? Math.round(done/total*100) : 0;
+// ── PHASE RING SVG ──────────────────────────────────────────────────────────
+function phaseRing(color,pct){
+  const r=11,cx=14,cy=14,circ=2*Math.PI*r;
+  const dash=circ*pct,gap=circ*(1-pct);
+  return`<div class="phase-ring-wrap">
+    <svg width="28" height="28" viewBox="0 0 28 28">
+      <circle cx="${cx}" cy="${cy}" r="${r}" fill="none" stroke="rgba(255,255,255,0.07)" stroke-width="2.5"/>
+      <circle cx="${cx}" cy="${cy}" r="${r}" fill="none" stroke="${color}" stroke-width="2.5"
+        stroke-dasharray="${dash.toFixed(1)} ${gap.toFixed(1)}" stroke-linecap="round" opacity=".85"/>
+    </svg>
+    <span class="phase-ring-dot" style="background:${color}"></span>
+  </div>`;
+}
+
+// ── WBS ─────────────────────────────────────────────────────────────────────
+function renderWBS(){
+  const p=proj();if(!p){document.getElementById('content').innerHTML='<div class="empty">No project.</div>';return;}
+  const sched=computeSched();
+  const total=p.tasks.length,done=p.tasks.filter(t=>t.status==='done').length,cp=p.tasks.filter(t=>t.cp).length;
+  const pct=total?Math.round(done/total*100):0;
 
   let html=`<div class="ph"><div>
     <div class="ph-title">Work breakdown structure ${p.isExample?'<span class="badge badge-example">example</span>':''}</div>
     <div class="progress-bar" style="width:200px"><div class="progress-fill" style="width:${pct}%"></div></div>
-    <div style="font-size:10px;color:var(--text3);font-family:var(--mono)">${done}/${total} tasks complete · ${pct}%</div>
+    <div style="font-size:10px;color:var(--text3);font-family:var(--mono)">${done}/${total} complete · ${pct}%</div>
   </div>
   <div class="ph-actions">
+    <div style="display:flex;align-items:center;gap:6px">
+      <input type="date" id="startDateInput" class="fi" style="width:140px;font-size:11px;padding:4px 8px" value="${p.startDate||''}" onchange="updateStartDate(this.value)" title="Project start date">
+      <label style="display:flex;align-items:center;gap:4px;font-size:11px;color:var(--text2);cursor:pointer;white-space:nowrap">
+        <input type="checkbox" ${p.skipWeekends!==false?'checked':''} onchange="updateSkipWeekends(this.checked)" style="accent-color:var(--accent)"> Skip weekends
+      </label>
+    </div>
     <button class="btn btn-sm" onclick="openPhaseModal(null)">+ Phase</button>
     <button class="btn btn-sm btn-primary" onclick="openTaskModal(null)">+ Task</button>
   </div></div>
   <div class="metrics">
     <div class="metric"><div class="metric-val">${total}</div><div class="metric-lbl">Total tasks</div></div>
     <div class="metric"><div class="metric-val">${p.phases.length}</div><div class="metric-lbl">Phases</div></div>
-    <div class="metric"><div class="metric-val">${sched.total}</div><div class="metric-lbl">Est. days</div></div>
+    <div class="metric"><div class="metric-val">${sched.totalDays}</div><div class="metric-lbl">Est. working days</div></div>
     <div class="metric"><div class="metric-val">${cp}</div><div class="metric-lbl">CP tasks</div></div>
   </div>`;
 
   p.phases.forEach(ph=>{
     const tasks=p.tasks.filter(t=>t.phaseId===ph.id);
     const phDone=tasks.filter(t=>t.status==='done').length;
+    const ringPct=tasks.length?phDone/tasks.length:0;
     const exp=ph.expanded!==false;
     html+=`<div class="wbs-phase">
       <div class="wbs-ph-hdr" onclick="togglePhase('${ph.id}')">
-        <span class="phase-dot" style="background:${ph.color}"></span>
+        ${phaseRing(ph.color,ringPct)}
         <input class="phase-name-edit" value="${escHtml(ph.name)}" onclick="event.stopPropagation()" onchange="updatePhaseName('${ph.id}',this.value)" title="Click to rename">
         <span class="phase-meta">${phDone}/${tasks.length} · ${tasks.reduce((s,t)=>s+t.days,0)}d</span>
         <button class="btn btn-ghost btn-icon btn-xs" onclick="event.stopPropagation();openPhaseModal('${ph.id}')" title="Edit phase color">🎨</button>
         <button class="btn btn-danger btn-icon btn-xs" onclick="event.stopPropagation();deletePhase('${ph.id}')" title="Delete phase">✕</button>
         <span class="exp-icon ${exp?'open':''}">▶</span>
       </div>`;
+
     if(exp){
-      html+=`<div class="wbs-tasks">`;
-      if(!tasks.length) html+=`<div style="padding:8px 10px;font-size:11px;color:var(--text3)">No tasks — add one below.</div>`;
+      // Phase notes
+      html+=`<div class="phase-notes-area">
+        <textarea class="phase-notes-input" rows="1" placeholder="Phase notes… (goals, deliverables, reminders)" onclick="event.stopPropagation()" onchange="updatePhaseNotes('${ph.id}',this.value)">${escHtml(ph.notes||'')}</textarea>
+      </div>`;
+
+      html+=`<div class="wbs-tasks" id="phase-tasks-${ph.id}">`;
+      if(!tasks.length)html+=`<div style="padding:8px 10px;font-size:11px;color:var(--text3)">No tasks — add one below.</div>`;
       tasks.forEach(t=>{
-        const isDone=t.status==='done';
-        html+=`<div class="wbs-task ${isDone?'done':''}" id="wtask-${t.id}">
-          <input type="checkbox" class="task-check" ${isDone?'checked':''} onchange="toggleTaskDone('${t.id}',this.checked)" title="Mark complete">
+        const isDone=t.status==='done',isIP=t.status==='inprogress';
+        const sdot=STATUS_COLORS[t.status]||'#606072';
+        // Calendar date chip
+        let dateChip='';
+        if(sched.startDate&&sched.esD[t.id]&&sched.efD[t.id]){
+          const esDate=sched.esD[t.id],efDate=sched.efD[t.id];
+          let cls='task-date-chip';
+          if(!isDone&&efDate<TODAY)cls+=' overdue';
+          else if(!isDone&&esDate<=TODAY&&efDate>=TODAY)cls+=' today';
+          else if(!isDone&&esDate>TODAY)cls+=' upcoming';
+          dateChip=`<span class="${cls}" title="Scheduled ${fmtDate(esDate)} – ${fmtDate(efDate)}">${fmtDate(esDate)} – ${fmtDate(efDate)}</span>`;
+        }
+        html+=`<div class="wbs-task ${isDone?'done':''}" id="wtask-${t.id}" draggable="true"
+          ondragstart="dragStart(event,'${t.id}','${ph.id}')"
+          ondragover="dragOver(event,'${t.id}')"
+          ondragleave="dragLeave(event)"
+          ondrop="dragDrop(event,'${t.id}','${ph.id}')">
+          <span class="drag-handle" title="Drag to reorder">⠿</span>
+          <input type="checkbox" class="task-check ${isIP?'inprogress':''}" ${isDone?'checked':''} onchange="toggleTaskDone('${t.id}',this.checked)" title="${isDone?'Done':isIP?'In progress':'Not started'}">
           <span class="task-id-lbl">${t.id}</span>
-          <input class="task-name-edit" value="${escHtml(t.name)}" onchange="updateTaskField('${t.id}','name',this.value)" title="Click to rename">
+          <input class="task-name-edit ${isIP?'inprogress':''}" value="${escHtml(t.name)}" onchange="updateTaskField('${t.id}','name',this.value)" title="Click to rename">
           ${t.cp?'<span class="badge badge-cp">CP</span>':''}
-          <span class="task-status-dot" style="background:${STATUS_COLORS[t.status]||'#606072'}" title="${t.status}"></span>
+          <span class="status-dot" style="background:${sdot}" title="${t.status}"></span>
           <span style="font-size:9px;color:var(--text3);font-family:var(--mono)">${(t.deps&&t.deps.length)?'→'+t.deps.join(','):''}</span>
-          <button class="task-days-pill" onclick="promptDays('${t.id}',${t.days})" title="Click to change duration"><span class="pill-icon">⏱</span>${t.days} days</button>
-          <button class="btn btn-ghost btn-icon btn-xs" onclick="openTaskModal('${t.id}')" title="Edit task details">✎</button>
+          ${dateChip}
+          <button class="task-days-pill" onclick="promptDays('${t.id}',${t.days})" title="Click to change duration">⏱ ${t.days} days</button>
+          <button class="btn btn-ghost btn-icon btn-xs" onclick="openTaskModal('${t.id}')" title="Edit task">✎</button>
           <button class="btn btn-danger btn-icon btn-xs" onclick="deleteTask('${t.id}')" title="Delete task">✕</button>
         </div>
         ${t.notes?`<div class="task-notes-row">📝 ${escHtml(t.notes)}</div>`:''}`;
@@ -458,43 +539,97 @@ function renderWBS() {
     }
     html+=`</div>`;
   });
-  if(!p.phases.length) html+=`<div class="empty">No phases yet. Click "+ Phase" to start building your WBS.</div>`;
+  if(!p.phases.length)html+=`<div class="empty">No phases yet. Click "+ Phase" to start.</div>`;
   document.getElementById('content').innerHTML=html;
 }
 
 function togglePhase(id){const ph=getPhase(id);if(ph){ph.expanded=ph.expanded===false;saveStore();renderWBS();}}
 function updatePhaseName(id,val){const ph=getPhase(id);if(ph){ph.name=val.trim()||ph.name;saveStore();updateSidebar();}}
+function updatePhaseNotes(id,val){const ph=getPhase(id);if(ph){ph.notes=val;saveStore();}}
 function updateTaskField(id,field,val){const t=getTask(id);if(t){t[field]=val;saveStore();renderWBS();}}
+function toggleTaskDone(id,checked){const t=getTask(id);if(t){t.status=checked?'done':(t.status==='inprogress'?'todo':'todo');saveStore();renderWBS();}}
+function updateStartDate(val){const p=proj();p.startDate=val;saveStore();renderWBS();}
+function updateSkipWeekends(val){const p=proj();p.skipWeekends=val;saveStore();renderWBS();}
 function promptDays(id,current){
-  const val=prompt(`Duration for this task (days):`,current);
-  if(val===null)return;
-  const n=parseInt(val);
+  const val=prompt('Duration for this task (working days):',current);
+  if(val===null)return;const n=parseInt(val);
   if(!n||n<1){alert('Please enter a number of 1 or more.');return;}
   updateTaskField(id,'days',n);
 }
-function toggleTaskDone(id,checked){const t=getTask(id);if(t){t.status=checked?'done':'todo';saveStore();renderWBS();}}
 
-// ── GANTT ─────────────────────────────────────────────────────────────────────
-function renderGantt() {
-  const p=proj(); if(!p){document.getElementById('content').innerHTML='<div class="empty">No project.</div>';return;}
-  const sched=computeSched(); const total=sched.total||1;
+// ── DRAG & DROP ──────────────────────────────────────────────────────────────
+function dragStart(e,taskId,phaseId){
+  dragSrcTask=taskId;dragSrcPhase=phaseId;
+  e.dataTransfer.effectAllowed='move';
+  setTimeout(()=>{const el=document.getElementById('wtask-'+taskId);if(el)el.classList.add('dragging');},0);
+}
+function dragOver(e,taskId){
+  e.preventDefault();e.dataTransfer.dropEffect='move';
+  document.querySelectorAll('.wbs-task').forEach(el=>el.classList.remove('drag-over'));
+  if(taskId!==dragSrcTask){const el=document.getElementById('wtask-'+taskId);if(el)el.classList.add('drag-over');}
+}
+function dragLeave(e){e.currentTarget.classList.remove('drag-over');}
+function dragDrop(e,targetId,targetPhase){
+  e.preventDefault();
+  document.querySelectorAll('.wbs-task').forEach(el=>{el.classList.remove('drag-over');el.classList.remove('dragging');});
+  if(!dragSrcTask||dragSrcTask===targetId)return;
+  const p=proj();
+  const tasks=p.tasks;
+  const srcIdx=tasks.findIndex(t=>t.id===dragSrcTask);
+  const tgtIdx=tasks.findIndex(t=>t.id===targetId);
+  if(srcIdx<0||tgtIdx<0)return;
+  const [moved]=tasks.splice(srcIdx,1);
+  // Move to same phase as target
+  moved.phaseId=targetPhase;
+  const newTgtIdx=tasks.findIndex(t=>t.id===targetId);
+  tasks.splice(newTgtIdx,0,moved);
+  dragSrcTask=null;dragSrcPhase=null;
+  saveStore();renderWBS();
+}
+
+// ── GANTT ────────────────────────────────────────────────────────────────────
+function renderGantt(){
+  const p=proj();if(!p){document.getElementById('content').innerHTML='<div class="empty">No project.</div>';return;}
+  const sched=computeSched();const total=sched.totalDays||1;
   const pct=d=>(d/total*100).toFixed(2)+'%';
   const step=Math.max(1,Math.round(total/10));
+
+  // Build tick labels (dates or day numbers)
   let ticks='';
-  for(let d=0;d<=total;d+=step) ticks+=`<div class="g-tick" style="left:${pct(d)}"><div class="g-tick-line"></div><div class="g-tick-lbl">d${d}</div></div>`;
+  for(let d=0;d<=total;d+=step){
+    let lbl;
+    if(sched.startDate){
+      let dt=new Date(sched.startDate);let added=0;
+      while(added<d){dt.setDate(dt.getDate()+1);if(sched.skip&&(dt.getDay()===0||dt.getDay()===6))continue;added++;}
+      lbl=fmtDate(dt);
+    } else lbl='d'+d;
+    ticks+=`<div class="g-date-lbl" style="left:${pct(d)}"><div class="g-date-line"></div><div class="g-date-txt">${lbl}</div></div>`;
+  }
+
+  // Today line
+  let todayLine='';
+  if(sched.startDate){
+    const todayOffset=workdaysBetween(sched.startDate,TODAY,sched.skip);
+    if(todayOffset>=0&&todayOffset<=total){
+      const lp=(todayOffset/total*100).toFixed(2)+'%';
+      todayLine=`<div class="g-today-line" style="left:${lp}"></div><div class="g-today-lbl" style="left:${lp}">today</div>`;
+    }
+  }
 
   let rows='';
   p.phases.forEach(ph=>{
     const tasks=p.tasks.filter(t=>t.phaseId===ph.id);
     rows+=`<div class="g-ph-row"><div class="g-name g-ph-name" style="color:${ph.color}">${escHtml(ph.name)}</div><div class="g-bar-wrap"></div></div>`;
     tasks.forEach(t=>{
-      const s=sched.es[t.id]||0,e=sched.ef[t.id]||t.days;
-      const col=t.cp?'#4f8ef7':'#2a8a5c';
-      const isDone=t.status==='done';
-      rows+=`<div class="g-task-row ${isDone?'done-row':''}">
-        <div class="g-name" style="padding-left:20px;color:${isDone?'var(--text3)':'var(--text2)'}">${t.id}: ${escHtml(t.name)}</div>
-        <div class="g-bar-wrap">
-          <div class="g-bar" style="left:${pct(s)};width:${pct(e-s)};background:${isDone?'#3ecf8e':col}" title="${escHtml(t.name)}: day ${s}–${e} (${e-s}d)">${e-s}d</div>
+      const s=sched.esDays[t.id]||0,e=sched.efDays[t.id]||t.days;
+      const l=pct(s),w=pct(e-s);
+      const col=t.status==='done'?'#3ecf8e':(t.status==='inprogress'?'#f5a623':(t.cp?'#4f8ef7':'#2a6e50'));
+      let tooltip=escHtml(t.name);
+      if(sched.startDate&&sched.esD[t.id])tooltip+=`: ${fmtDate(sched.esD[t.id])} – ${fmtDate(sched.efD[t.id])}`;
+      rows+=`<div class="g-task-row ${t.status==='done'?'done-row':''}">
+        <div class="g-name" style="padding-left:20px;color:${t.status==='done'?'var(--text3)':'var(--text2)'}">${t.id}: ${escHtml(t.name)}</div>
+        <div class="g-bar-wrap">${todayLine}
+          <div class="g-bar" style="left:${l};width:${w};background:${col}" title="${tooltip}">${e-s}d</div>
         </div>
       </div>`;
     });
@@ -502,10 +637,10 @@ function renderGantt() {
 
   document.getElementById('content').innerHTML=`
   <div class="ph"><div class="ph-title">Gantt chart</div>
-    <div style="font-size:11px;color:var(--text3)">CPM forward pass · <strong style="color:var(--text2)">${total} days total</strong></div>
+    <div style="font-size:11px;color:var(--text3)">CPM forward pass · <strong style="color:var(--text2)">${total} working days</strong>${sched.startDate?` · starts ${fmtDate(sched.startDate)}`:'&nbsp;— <span style="color:var(--amber)">set a start date in WBS to see calendar dates</span>'}</div>
   </div>
   <div class="metrics" style="grid-template-columns:repeat(3,1fr)">
-    <div class="metric"><div class="metric-val">${total}</div><div class="metric-lbl">Duration (CPM)</div></div>
+    <div class="metric"><div class="metric-val">${total}</div><div class="metric-lbl">Duration (days)</div></div>
     <div class="metric"><div class="metric-val">${p.tasks.filter(t=>t.cp).length}</div><div class="metric-lbl">CP tasks</div></div>
     <div class="metric"><div class="metric-val">${p.tasks.filter(t=>t.status==='done').length}</div><div class="metric-lbl">Completed</div></div>
   </div>
@@ -513,22 +648,22 @@ function renderGantt() {
     <div class="g-hdr"><div class="g-name-col">Task</div><div class="g-bar-area" style="position:relative;height:30px">${ticks}</div></div>
     <div class="g-body">${rows}</div>
   </div>
-  <div style="display:flex;gap:14px;margin-top:8px;font-size:10px;color:var(--text3)">
+  <div style="display:flex;gap:14px;margin-top:10px;font-size:10px;color:var(--text3)">
     <span><span style="display:inline-block;width:8px;height:8px;border-radius:2px;background:#4f8ef7;vertical-align:middle;margin-right:4px"></span>Critical path</span>
-    <span><span style="display:inline-block;width:8px;height:8px;border-radius:2px;background:#2a8a5c;vertical-align:middle;margin-right:4px"></span>Normal task</span>
+    <span><span style="display:inline-block;width:8px;height:8px;border-radius:2px;background:#2a6e50;vertical-align:middle;margin-right:4px"></span>Normal task</span>
+    <span><span style="display:inline-block;width:8px;height:8px;border-radius:2px;background:#f5a623;vertical-align:middle;margin-right:4px"></span>In progress</span>
     <span><span style="display:inline-block;width:8px;height:8px;border-radius:2px;background:#3ecf8e;vertical-align:middle;margin-right:4px"></span>Completed</span>
+    ${sched.startDate?'<span><span style="display:inline-block;width:8px;height:2px;background:rgba(245,166,35,.6);vertical-align:middle;margin-right:4px"></span>Today</span>':''}
   </div>`;
 }
 
-// ── PERT ──────────────────────────────────────────────────────────────────────
-function renderPert() {
-  const p=proj(); if(!p){document.getElementById('content').innerHTML='<div class="empty">No project.</div>';return;}
-  let cpSum=0,cpVar=0;
-  let rows='';
+// ── PERT ─────────────────────────────────────────────────────────────────────
+function renderPert(){
+  const p=proj();if(!p){document.getElementById('content').innerHTML='<div class="empty">No project.</div>';return;}
+  let cpSum=0,cpVar=0;let rows='';
   p.pert.forEach((entry,i)=>{
     const task=getTask(entry.taskId);
-    const te=(entry.a+4*entry.m+entry.b)/6;
-    const va=Math.pow((entry.b-entry.a)/6,2);
+    const te=(entry.a+4*entry.m+entry.b)/6,va=Math.pow((entry.b-entry.a)/6,2);
     const isCP=task&&task.cp;
     if(isCP){cpSum+=te;cpVar+=va;}
     rows+=`<tr class="${isCP?'is-cp':''}">
@@ -542,22 +677,19 @@ function renderPert() {
       <td><button class="btn btn-danger btn-icon btn-xs" onclick="pertDel(${i})" title="Remove">✕</button></td>
     </tr>`;
   });
-
   const sd=Math.sqrt(cpVar);
   function nCDF(z){const t=1/(1+.2316419*Math.abs(z));const poly=t*(0.319381530+t*(-0.356563782+t*(1.781477937+t*(-1.821255978+t*1.330274429))));const p=1-(1/Math.sqrt(2*Math.PI))*Math.exp(-.5*z*z)*poly;return z>=0?p:1-p;}
   const probs=[
-    {label:`Day ${cpSum.toFixed(1)} — expected (50%)`,days:cpSum,prob:50},
-    {label:`Day ${(cpSum+sd).toFixed(1)} — te + 1σ`,days:cpSum+sd,prob:nCDF(1)*100},
-    {label:`Day ${(cpSum+1.645*sd).toFixed(1)} — 95th percentile`,days:cpSum+1.645*sd,prob:95},
-    {label:`Day ${(cpSum+2*sd).toFixed(1)} — te + 2σ`,days:cpSum+2*sd,prob:nCDF(2)*100},
+    {label:`Day ${cpSum.toFixed(1)} — expected (50%)`,prob:50},
+    {label:`Day ${(cpSum+sd).toFixed(1)} — te + 1σ`,prob:nCDF(1)*100},
+    {label:`Day ${(cpSum+1.645*sd).toFixed(1)} — 95th percentile`,prob:95},
+    {label:`Day ${(cpSum+2*sd).toFixed(1)} — te + 2σ`,prob:nCDF(2)*100},
   ];
-
   const unusedTasks=p.tasks.filter(t=>!p.pert.find(e=>e.taskId===t.id));
   const addOpts=unusedTasks.map(t=>`<option value="${t.id}">${t.id}: ${t.name}</option>`).join('');
-
   document.getElementById('content').innerHTML=`
   <div class="ph"><div class="ph-title">PERT analyzer</div></div>
-  <div class="formula-box">t<sub>e</sub> = (a + 4m + b) / 6 &nbsp;·&nbsp; σ² = ((b−a)/6)² &nbsp;·&nbsp; CP probability: normal distribution on sum of CP activities</div>
+  <div class="formula-box">tₑ = (a + 4m + b) / 6 &nbsp;·&nbsp; σ² = ((b−a)/6)² &nbsp;·&nbsp; Completion probability via normal distribution on CP sum</div>
   <div class="scrolltbl"><table class="pert-tbl">
     <thead><tr><th>Activity</th><th>Optimistic a</th><th>Most likely m</th><th>Pessimistic b</th><th>tₑ</th><th>σ²</th><th>CP?</th><th></th></tr></thead>
     <tbody>${rows}</tbody>
@@ -577,22 +709,70 @@ function renderPert() {
     ${probs.map(p=>`<div class="prob-item"><div class="prob-lbl">${p.label}</div><div class="prob-bar-o"><div class="prob-bar-i" style="width:${p.prob.toFixed(1)}%"></div></div><div class="prob-pct">${p.prob.toFixed(1)}%</div></div>`).join('')}
   </div>`;
 }
-
 function pertUpd(i,f,v){proj().pert[i][f]=v;saveStore();renderPert();}
 function pertDel(i){proj().pert.splice(i,1);saveStore();renderPert();}
 function pertAdd(){const sel=document.getElementById('pertAddSel');if(!sel||!sel.value)return;proj().pert.push({taskId:sel.value,a:1,m:3,b:6});saveStore();renderPert();}
 
+// ── GOOGLE CALENDAR EXPORT ───────────────────────────────────────────────────
+async function exportToGCal(){
+  const p=proj();
+  if(!p.startDate){alert('Please set a project start date in the WBS view first — otherwise we cannot calculate real calendar dates for each task.');return;}
+  const sched=computeSched();
+  const btn=document.getElementById('gcalBtn');
+  btn.textContent='📅 Exporting…';btn.disabled=true;
+
+  const tasks=p.tasks.filter(t=>sched.esD[t.id]&&sched.efD[t.id]);
+  let created=0,failed=0;
+
+  for(const t of tasks){
+    const startIso=isoDate(sched.esD[t.id]);
+    // Google Calendar all-day events need end = day after last day
+    const endDate=new Date(sched.efD[t.id]);endDate.setDate(endDate.getDate()+1);
+    const endIso=isoDate(endDate);
+    const desc=[
+      `Project: ${p.name}`,
+      `Phase: ${(getPhase(t.phaseId)||{name:'—'}).name}`,
+      `Duration: ${t.days} working days`,
+      `Status: ${t.status}`,
+      t.cp?'⚡ Critical path task':'',
+      t.deps&&t.deps.length?`Depends on: ${t.deps.join(', ')}` : '',
+      t.notes?`Notes: ${t.notes}`:'',
+    ].filter(Boolean).join('\n');
+
+    try{
+      const res=await fetch('https://calendarmcp.googleapis.com/mcp/v1',{
+        method:'POST',
+        headers:{'Content-Type':'application/json'},
+        body:JSON.stringify({
+          jsonrpc:'2.0',id:1,method:'tools/call',
+          params:{name:'create_event',arguments:{
+            summary:`[${p.name.substring(0,20)}] ${t.name}`,
+            description:desc,
+            start:{date:startIso},
+            end:{date:endIso},
+            colorId: t.cp?'11':(t.status==='done'?'2':'1')
+          }}
+        })
+      });
+      if(res.ok)created++;else failed++;
+    }catch(e){failed++;}
+  }
+
+  btn.textContent='📅 Google Calendar';btn.disabled=false;
+  if(failed===0)alert(`✅ ${created} tasks exported to Google Calendar!`);
+  else alert(`Exported ${created} tasks. ${failed} failed — you may need to re-authenticate Google Calendar in your Claude settings.`);
+}
+
 // ── PROJECTS ──────────────────────────────────────────────────────────────────
-function renderProjects() {
+function renderProjects(){
   let cards=store.projects.map(p=>{
-    const done=p.tasks.filter(t=>t.status==='done').length;
-    const total=p.tasks.length;
+    const done=p.tasks.filter(t=>t.status==='done').length,total=p.tasks.length;
     const pct=total?Math.round(done/total*100):0;
     const isCurrent=p.id===store.currentProjectId;
-    return `<div class="proj-card ${isCurrent?'current':''}" onclick="selectProject('${p.id}')">
+    return`<div class="proj-card ${isCurrent?'current':''}" onclick="selectProject('${p.id}')">
       ${p.isExample?'<span class="badge badge-example" style="margin-bottom:6px">example</span><br>':''}
       <div class="proj-card-name">${escHtml(p.name)} ${isCurrent?'<span style="font-size:9px;color:var(--accent);font-family:var(--mono)">● current</span>':''}</div>
-      <div class="proj-card-meta">${total} tasks · ${done} done · ${pct}% complete</div>
+      <div class="proj-card-meta">${total} tasks · ${done} done · ${pct}% · ${p.startDate?fmtDate(new Date(p.startDate)):'no start date'}</div>
       <div class="progress-bar" style="margin-top:6px"><div class="progress-fill" style="width:${pct}%"></div></div>
       <div class="proj-card-actions" onclick="event.stopPropagation()">
         <button class="btn btn-ghost btn-xs" onclick="duplicateProject('${p.id}')" title="Duplicate">⧉</button>
@@ -600,67 +780,43 @@ function renderProjects() {
       </div>
     </div>`;
   }).join('');
-
   document.getElementById('content').innerHTML=`
-  <div class="ph"><div class="ph-title">All projects</div>
-    <button class="btn btn-primary btn-sm" onclick="openProjModal()">+ New project</button>
-  </div>
-  <p style="font-size:11px;color:var(--text3);margin-bottom:16px">Each project is saved privately in your browser. Nobody else can see your data.</p>
-  ${cards||'<div class="empty">No projects yet. Create one to get started.</div>'}`;
+  <div class="ph"><div class="ph-title">All projects</div><button class="btn btn-primary btn-sm" onclick="openProjModal()">+ New project</button></div>
+  <p style="font-size:11px;color:var(--text3);margin-bottom:16px">Each project is saved privately in your browser. No one else can see your data.</p>
+  ${cards||'<div class="empty">No projects. Create one to get started.</div>'}`;
 }
-
 function selectProject(id){store.currentProjectId=id;saveStore();currentView='wbs';render();}
-
 function duplicateProject(id){
-  const src=store.projects.find(p=>p.id===id);
-  if(!src)return;
+  const src=store.projects.find(p=>p.id===id);if(!src)return;
   const copy=JSON.parse(JSON.stringify(src));
-  copy.id='proj_'+Date.now();
-  copy.name=src.name+' (copy)';
-  copy.isExample=false;
-  copy.created=Date.now();
-  store.projects.push(copy);
-  saveStore();
-  renderProjects();
+  copy.id='proj_'+Date.now();copy.name=src.name+' (copy)';copy.isExample=false;copy.created=Date.now();
+  store.projects.push(copy);saveStore();renderProjects();
 }
-
 function deleteProject(id){
   if(store.projects.length===1){alert('You must have at least one project.');return;}
   if(!confirm('Delete this project? This cannot be undone.'))return;
   store.projects=store.projects.filter(p=>p.id!==id);
-  if(store.currentProjectId===id) store.currentProjectId=store.projects[0].id;
+  if(store.currentProjectId===id)store.currentProjectId=store.projects[0].id;
   saveStore();renderProjects();updateSidebar();document.getElementById('topProjName').textContent=proj().name;
 }
-
-function openProjModal(){document.getElementById('proj-name-input').value='';document.getElementById('projModalTitle').textContent='New project';openModal('projModal');}
-
+function openProjModal(){document.getElementById('proj-name-input').value='';openModal('projModal');}
 function createProject(){
   const name=document.getElementById('proj-name-input').value.trim();
   if(!name){alert('Enter a project name.');return;}
   const tmpl=document.getElementById('proj-template').value;
-  let newProj;
-  if(tmpl==='example'){
-    newProj=JSON.parse(JSON.stringify(EXAMPLE_PROJECT));
-    newProj.isExample=false;
-  } else {
-    newProj={phases:[],tasks:[],pert:[]};
-  }
-  newProj.id='proj_'+Date.now();
-  newProj.name=name;
-  newProj.created=Date.now();
-  store.projects.push(newProj);
-  store.currentProjectId=newProj.id;
+  let np=tmpl==='example'?JSON.parse(JSON.stringify(EXAMPLE_PROJECT)):{phases:[],tasks:[],pert:[]};
+  np.id='proj_'+Date.now();np.name=name;np.created=Date.now();np.isExample=false;
+  if(!np.startDate)np.startDate='';
+  store.projects.push(np);store.currentProjectId=np.id;
   saveStore();closeModal('projModal');currentView='wbs';render();
 }
 
 // ── TASK MODAL ────────────────────────────────────────────────────────────────
-function openTaskModal(id, defaultPhaseId) {
-  editingTaskId=id;
-  const p=proj();
+function openTaskModal(id,defaultPhaseId){
+  editingTaskId=id;const p=proj();
   document.getElementById('tf-phase').innerHTML=p.phases.map(ph=>`<option value="${ph.id}">${ph.name}</option>`).join('');
   if(id){
-    const t=getTask(id);
-    if(!t)return;
+    const t=getTask(id);if(!t)return;
     document.getElementById('taskModalTitle').textContent='Edit task';
     document.getElementById('tf-name').value=t.name;
     document.getElementById('tf-days').value=t.days;
@@ -672,18 +828,15 @@ function openTaskModal(id, defaultPhaseId) {
     document.getElementById('tf-delete-btn').style.display='inline-flex';
   } else {
     document.getElementById('taskModalTitle').textContent='Add task';
-    document.getElementById('tf-name').value='';
+    ['tf-name','tf-deps','tf-notes'].forEach(id=>document.getElementById(id).value='');
     document.getElementById('tf-days').value=3;
-    document.getElementById('tf-deps').value='';
-    document.getElementById('tf-notes').value='';
     document.getElementById('tf-status').value='todo';
     document.getElementById('tf-cp').checked=false;
-    if(defaultPhaseId) document.getElementById('tf-phase').value=defaultPhaseId;
+    if(defaultPhaseId)document.getElementById('tf-phase').value=defaultPhaseId;
     document.getElementById('tf-delete-btn').style.display='none';
   }
   openModal('taskModal');
 }
-
 function saveTask(){
   const name=document.getElementById('tf-name').value.trim();
   if(!name){alert('Task name required.');return;}
@@ -693,15 +846,10 @@ function saveTask(){
   const notes=document.getElementById('tf-notes').value.trim();
   const status=document.getElementById('tf-status').value;
   const cp=document.getElementById('tf-cp').checked;
-  if(editingTaskId){
-    const t=getTask(editingTaskId);
-    Object.assign(t,{name,days,phaseId,deps,notes,status,cp});
-  } else {
-    proj().tasks.push({id:nextTid(),name,phaseId,days,cp,deps,status,notes});
-  }
+  if(editingTaskId){Object.assign(getTask(editingTaskId),{name,days,phaseId,deps,notes,status,cp});}
+  else proj().tasks.push({id:nextTid(),name,phaseId,days,cp,deps,status,notes});
   saveStore();closeModal('taskModal');render();
 }
-
 function deleteTask(id){if(!confirm('Delete this task?'))return;const p=proj();p.tasks=p.tasks.filter(t=>t.id!==id);p.pert=p.pert.filter(e=>e.taskId!==id);p.tasks.forEach(t=>{t.deps=(t.deps||[]).filter(d=>d!==id);});saveStore();render();}
 function deleteTaskFromModal(){if(editingTaskId){closeModal('taskModal');deleteTask(editingTaskId);}}
 
@@ -714,20 +862,14 @@ function openPhaseModal(id){
   document.getElementById('pf-delete-btn').style.display=id?'inline-flex':'none';
   renderSwatches();openModal('phaseModal');
 }
-
-function renderSwatches(){
-  document.getElementById('colorSwatches').innerHTML=COLORS.map(c=>`<div class="cswatch ${c===selectedColor?'sel':''}" style="background:${c}" onclick="selectColor('${c}')"></div>`).join('');
-}
+function renderSwatches(){document.getElementById('colorSwatches').innerHTML=COLORS.map(c=>`<div class="cswatch ${c===selectedColor?'sel':''}" style="background:${c}" onclick="selectColor('${c}')"></div>`).join('');}
 function selectColor(c){selectedColor=c;renderSwatches();}
-
 function savePhase(){
-  const name=document.getElementById('pf-name').value.trim();
-  if(!name){alert('Phase name required.');return;}
+  const name=document.getElementById('pf-name').value.trim();if(!name){alert('Phase name required.');return;}
   if(editingPhaseId){const ph=getPhase(editingPhaseId);ph.name=name;ph.color=selectedColor;}
-  else proj().phases.push({id:nextPid(),name,color:selectedColor,expanded:true});
+  else proj().phases.push({id:nextPid(),name,color:selectedColor,expanded:true,notes:''});
   saveStore();closeModal('phaseModal');render();
 }
-
 function deletePhase(id){
   const tasks=proj().tasks.filter(t=>t.phaseId===id);
   if(tasks.length&&!confirm(`Delete this phase and its ${tasks.length} task(s)?`))return;
@@ -749,79 +891,67 @@ function renderHelp(){
   <div class="help-section">
     <h4>GETTING STARTED</h4>
     <p>This tool has three views: <strong>WBS tree</strong> (break your project into tasks), <strong>Gantt chart</strong> (see the timeline automatically), and <strong>PERT analyzer</strong> (estimate how long the project will realistically take). Use the left sidebar to switch between them.</p>
-    <div class="tip">The "Vision system integration" project is a built-in example. It shows you how phases, tasks, dependencies, CP tags, and PERT entries all connect together. You can edit it freely, delete it, or copy it as a template for a new project.</div>
+    <div class="tip">The "Vision system integration" project is a built-in example. It shows you how phases, tasks, dependencies, CP tags, and PERT entries all connect together. You can edit it freely, delete it, or copy it as a template.</div>
   </div>
 
   <div class="help-section">
     <h4>PROJECTS</h4>
     <ul>
       <li>Click the project name in the top bar to open <strong>All projects</strong> and switch between them.</li>
-      <li>Each project is completely independent — different phases, tasks, and PERT data.</li>
-      <li>Your data is saved automatically in your own browser. No account needed, and nobody else can see it — not even someone opening the same website URL on a different device.</li>
-      <li>Use <strong>↓ JSON</strong> to download a backup file, and <strong>↑ Import</strong> to restore it later or move it to another browser/device.</li>
+      <li>Your data is saved automatically in your own browser. No account needed. Nobody else can see it — not even someone opening the same URL on another device.</li>
+      <li>Use <strong>↓ JSON</strong> to download a backup, and <strong>↑ Import</strong> to restore or move to another browser.</li>
       <li>You can duplicate any project to use it as a starting point for a new one.</li>
     </ul>
   </div>
 
   <div class="help-section">
-    <h4>WBS TREE — building and editing your project</h4>
-    <p>WBS stands for Work Breakdown Structure. The idea is to break your project into phases, and each phase into individual tasks. This forces you to think through everything that needs to happen before you start.</p>
-    <ul style="margin-top:8px">
-      <li><strong>Phase name:</strong> click the name text directly to rename it.</li>
-      <li><strong>Task name:</strong> click any task name to edit it inline — press Enter or click away to save.</li>
-      <li><strong>Duration:</strong> click the <em>⏱ X days</em> pill on any task to change how many days it takes.</li>
-      <li><strong>Mark complete:</strong> tick the checkbox on the left. The task gets a strikethrough and the progress bar updates.</li>
-      <li><strong>Full edit (✎):</strong> opens a panel where you can change the task's phase, dependencies, notes, status, and CP flag.</li>
-      <li><strong>Dependencies:</strong> if task T5 can only start after T4 finishes, write T4 in the dependencies field of T5. This is what makes the Gantt chart and PERT calculations correct.</li>
-      <li><strong>Delete:</strong> the ✕ button on any task or phase. Deleting a phase removes all its tasks.</li>
+    <h4>WBS TREE</h4>
+    <ul>
+      <li><strong>Phase name:</strong> click directly on the name to rename it.</li>
+      <li><strong>Phase notes:</strong> the italic field below each phase header is a free-text notes area — use it for goals, deliverables, or reminders for that phase.</li>
+      <li><strong>Task name:</strong> click any task name to edit it inline.</li>
+      <li><strong>Duration:</strong> click the ⏱ pill on any task to change how many working days it takes.</li>
+      <li><strong>Reorder tasks:</strong> grab the ⠿ handle on the left of any task and drag it up or down. You can also drag tasks between phases.</li>
+      <li><strong>Mark complete:</strong> tick the checkbox. The task gets a strikethrough. In-progress tasks show a yellow checkbox.</li>
+      <li><strong>Full edit (✎):</strong> opens a panel to change phase, dependencies, notes, status, and CP flag.</li>
+      <li><strong>Start date:</strong> set a project start date at the top of the WBS. Once set, every task shows its real calendar dates (e.g. "3 Jun – 7 Jun"). Toggle "skip weekends" to exclude Saturday and Sunday from duration counting.</li>
     </ul>
   </div>
 
   <div class="help-section">
     <h4>WHAT IS THE CRITICAL PATH (CP)?</h4>
-    <p>The critical path is the longest chain of dependent tasks from start to finish. It is "critical" because any delay in one of these tasks delays the entire project. Tasks that are not on the critical path have some slack — you could delay them slightly without affecting the end date.</p>
-    <p style="margin-top:6px">Example: if your project takes 42 days total, the critical path is the specific sequence of tasks that adds up to exactly 42 days. If you speed up a task that is not on the critical path, the project end date does not change. If you speed up a critical path task, the whole project finishes earlier.</p>
-    <div class="tip">In this tool, you manually tag tasks as CP using the checkbox in the task edit modal. In a real CPM calculation you would compute it from the dependencies — but tagging it yourself is useful when you already know which tasks are the bottleneck, or when you want to highlight them in the Gantt and PERT views. Tasks tagged CP show a blue badge in the WBS and a blue bar in the Gantt.</div>
-    <p style="margin-top:8px">When you move to the PERT analyzer, only the CP-tagged tasks contribute to the final project duration estimate and the probability calculations. So make sure the tasks you tag as CP are genuinely the ones that determine your end date.</p>
+    <p>The critical path is the longest chain of dependent tasks from start to finish. It is "critical" because any delay in one of these tasks delays the entire project. Tasks not on the critical path have some slack — you could delay them slightly without affecting the end date.</p>
+    <p style="margin-top:6px">Example: if your project takes 42 days, the critical path is the specific sequence of tasks that adds up to exactly 42 days. Speeding up a non-CP task does nothing to the end date. Speeding up a CP task makes the whole project finish earlier.</p>
+    <div class="tip">In this tool, you manually tag tasks as CP using the checkbox in the task edit modal. Tasks tagged CP show a blue badge in the WBS and a blue bar in the Gantt. In the PERT analyzer, only CP-tagged tasks contribute to the total project duration estimate — so tag the tasks that genuinely determine your end date.</div>
   </div>
 
   <div class="help-section">
     <h4>GANTT CHART</h4>
-    <p>The Gantt chart is generated automatically from your tasks and dependencies. It shows each task as a bar on a timeline. The position and width of the bar are calculated using the CPM forward pass: each task starts as soon as all its dependencies are finished.</p>
+    <p>The Gantt is generated automatically from your tasks and dependencies using the CPM forward pass — each task starts as soon as all its dependencies finish. Blue = CP, green = normal, yellow = in progress, teal = done. If you have set a start date, a vertical amber line shows today's position on the timeline.</p>
+    <div class="tip">Edit tasks in the WBS and the Gantt updates instantly. You cannot edit the Gantt directly.</div>
+  </div>
+
+  <div class="help-section">
+    <h4>PERT ANALYZER</h4>
+    <p>PERT lets you give three time estimates per task instead of one: <strong>a</strong> (optimistic — best case), <strong>m</strong> (most likely), <strong>b</strong> (pessimistic — worst case). It then calculates a realistic expected duration and, crucially, how uncertain that estimate is.</p>
     <ul style="margin-top:8px">
-      <li>Blue bars are CP tasks. Green bars are normal tasks. Teal bars are completed tasks.</li>
-      <li>You do not edit the Gantt directly — change your tasks in the WBS tree and the Gantt updates instantly.</li>
-      <li>The total duration shown is the deterministic CPM result — it assumes every task takes exactly the number of days you entered. For a probabilistic estimate, use the PERT analyzer.</li>
+      <li>Add tasks to the PERT table using the dropdown below it.</li>
+      <li><strong>tₑ</strong> is the expected duration: (a + 4m + b) / 6.</li>
+      <li><strong>σ²</strong> is the variance — how uncertain the estimate is. A wide gap between a and b means high variance.</li>
+      <li>The probability bars at the bottom sum up all CP task durations and variances to give the total project length with confidence levels. "95th percentile" means you are 95% confident the project finishes by that day.</li>
     </ul>
+    <div class="tip">The wider the gap between your 50% and 95% dates, the more uncertain your schedule is — consider reducing scope or adding buffer to those tasks.</div>
   </div>
 
   <div class="help-section">
-    <h4>PERT ANALYZER — what it does and how to use it</h4>
-    <p>PERT stands for Program Evaluation and Review Technique. The problem it solves is simple: in real life, you never know exactly how long a task will take. PERT lets you give three estimates instead of one — best case, most likely, and worst case — and then calculates a realistic expected duration along with how uncertain that estimate is.</p>
-    <p style="margin-top:8px"><strong>How to use it step by step:</strong></p>
-    <ul style="margin-top:6px">
-      <li>First, go to the WBS tree and tag your CP tasks. Only CP tasks affect the total project duration in PERT.</li>
-      <li>In the PERT analyzer, click the dropdown at the bottom of the table and add the tasks you want to estimate — typically all your CP tasks, but you can add any task.</li>
-      <li>For each task, enter three numbers in days: <strong>a</strong> (optimistic — best case if everything goes well), <strong>m</strong> (most likely — your realistic estimate), <strong>b</strong> (pessimistic — worst case if things go wrong).</li>
-      <li>The tool calculates <strong>tₑ</strong> (expected duration) and <strong>σ²</strong> (variance, which measures uncertainty) automatically.</li>
-      <li>The summary at the bottom adds up all CP task durations and variances to give you the total expected project length, the standard deviation, and the probability of finishing by different dates.</li>
-    </ul>
-    <div class="tip" style="margin-top:10px">Reading the probability bars: "50% chance of finishing by day 19" means if you ran this project many times, half the time it would finish by day 19. The 95% bar gives you the deadline you could quote with high confidence. The wider the gap between the 50% and 95% bars, the more uncertain your schedule is.</div>
-    <div class="tip" style="margin-top:6px">The key difference from the Gantt: the Gantt assumes every task takes exactly the days you set. PERT acknowledges that reality is uncertain and gives you a range. Use both together — the Gantt for planning and communication, PERT for risk assessment.</div>
+    <h4>GOOGLE CALENDAR EXPORT</h4>
+    <p>Click <strong>📅 Google Calendar</strong> in the top bar to push all tasks as calendar events. Each task becomes an all-day event spanning its scheduled start and finish dates. CP tasks are highlighted in red, completed tasks in green. You must set a project start date first, and have Google Calendar connected in your Claude settings.</p>
   </div>
 
   <div class="help-section">
-    <h4>DOWNLOADING YOUR SUMMARY</h4>
-    <p>Click <strong>⬇ Download summary</strong> in the top bar. A new tab opens with your WBS, Gantt chart, and PERT analysis combined on one page. Click "Print / Save PDF" in that tab to save it.</p>
-    <div class="tip">Chrome/Edge: Ctrl+P → Destination: Save as PDF → More settings → uncheck "Headers and footers" for a cleaner result.</div>
-  </div>
-
-  <div class="help-section">
-    <h4>KEYBOARD SHORTCUTS</h4>
-    <ul>
-      <li><strong>Esc</strong> — close any open modal</li>
-      <li><strong>Enter</strong> — confirm inline edits (task name, phase name)</li>
-    </ul>
+    <h4>DOWNLOAD SUMMARY</h4>
+    <p>Click <strong>⬇ Download summary</strong> to open a print-ready page combining WBS, Gantt, and PERT. Use your browser's Ctrl+P → Save as PDF to save it.</p>
+    <div class="tip">Chrome/Edge: Ctrl+P → Destination: Save as PDF → More settings → uncheck "Headers and footers".</div>
   </div>
 
   </div>`;
@@ -833,7 +963,6 @@ function exportJSON(){
   const a=document.createElement('a');a.href=URL.createObjectURL(blob);
   a.download=(proj().name||'project').replace(/\s+/g,'-').toLowerCase()+'.json';a.click();
 }
-
 function importJSON(event){
   const file=event.target.files[0];if(!file)return;
   const reader=new FileReader();
@@ -842,6 +971,8 @@ function importJSON(event){
       const parsed=JSON.parse(e.target.result);
       if(!parsed.phases||!parsed.tasks){alert('Invalid project file.');return;}
       parsed.id='proj_'+Date.now();parsed.isExample=false;
+      if(!parsed.startDate)parsed.startDate='';
+      parsed.phases.forEach(ph=>{if(!ph.notes)ph.notes='';});
       store.projects.push(parsed);store.currentProjectId=parsed.id;
       saveStore();render();
     }catch(err){alert('Could not read file: '+err.message);}
@@ -850,13 +981,11 @@ function importJSON(event){
 }
 
 function exportPDF(){
-  const p=proj(); const sched=computeSched(); const total=sched.total||1;
-  const pct=d=>(d/total*100).toFixed(2)+'%';
-  const step=Math.max(1,Math.round(total/10));
+  const p=proj();const sched=computeSched();const total=sched.totalDays||1;
   const doneTasks=p.tasks.filter(t=>t.status==='done').length;
   const progress=p.tasks.length?Math.round(doneTasks/p.tasks.length*100):0;
+  const pct=d=>(d/total*100).toFixed(2)+'%';
 
-  // WBS HTML
   let wbsHtml='';
   p.phases.forEach(ph=>{
     const tasks=p.tasks.filter(t=>t.phaseId===ph.id);
@@ -865,44 +994,41 @@ function exportPDF(){
         <span style="width:8px;height:8px;border-radius:50%;background:${ph.color};display:inline-block"></span>
         <strong style="font-size:12px">${escHtml(ph.name)}</strong>
         <span style="font-size:10px;color:#888;margin-left:auto">${tasks.length} tasks</span>
-      </div>`;
+      </div>
+      ${ph.notes?`<div style="padding:5px 12px 6px;font-size:10px;color:#666;font-style:italic;border-bottom:1px solid #f0f0f0">${escHtml(ph.notes)}</div>`:''}`;
     tasks.forEach(t=>{
+      const dateStr=(sched.startDate&&sched.esD[t.id])?` · ${fmtDate(sched.esD[t.id])} – ${fmtDate(sched.efD[t.id])}`:'';
       wbsHtml+=`<div style="padding:6px 12px 6px 24px;border-bottom:1px solid #f0f0f0;display:flex;align-items:center;gap:8px;font-size:11px">
         <span style="color:#999;width:24px;font-family:monospace">${t.id}</span>
         <span style="${t.status==='done'?'text-decoration:line-through;color:#999':''}flex:1">${t.status==='done'?'✅ ':''}${escHtml(t.name)}</span>
         ${t.cp?'<span style="font-size:9px;background:#e8f0fe;color:#1a56db;padding:1px 5px;border-radius:3px;font-weight:600">CP</span>':''}
-        <span style="color:#666;font-family:monospace">${t.days}d</span>
-        ${t.deps&&t.deps.length?`<span style="color:#aaa;font-size:9px">→${t.deps.join(',')}</span>`:''}
+        <span style="color:#666;font-family:monospace;font-size:10px">${t.days}d${dateStr}</span>
       </div>`;
     });
     wbsHtml+='</div>';
   });
 
-  // Gantt HTML
   let ganttRows='';
   p.phases.forEach(ph=>{
     const tasks=p.tasks.filter(t=>t.phaseId===ph.id);
     ganttRows+=`<tr style="background:#f8f8f8"><td style="padding:5px 10px;font-weight:600;font-size:11px;color:${ph.color};width:180px;border-right:1px solid #ddd">${escHtml(ph.name)}</td><td></td></tr>`;
     tasks.forEach(t=>{
-      const s=sched.es[t.id]||0,e=sched.ef[t.id]||t.days;
-      const col=t.status==='done'?'#3ecf8e':(t.cp?'#4f8ef7':'#2a8a5c');
-      ganttRows+=`<tr><td style="padding:4px 10px 4px 20px;font-size:10px;color:#555;border-right:1px solid #ddd;white-space:nowrap;overflow:hidden;max-width:180px">${t.id}: ${escHtml(t.name)}</td>
+      const s=sched.esDays[t.id]||0,e=sched.efDays[t.id]||t.days;
+      const col=t.status==='done'?'#3ecf8e':(t.status==='inprogress'?'#f5a623':(t.cp?'#4f8ef7':'#2a8a5c'));
+      ganttRows+=`<tr><td style="padding:4px 10px 4px 20px;font-size:10px;color:#555;border-right:1px solid #ddd;max-width:180px;overflow:hidden">${t.id}: ${escHtml(t.name)}</td>
         <td style="padding:4px 6px;position:relative">
-          <div style="margin-left:${(s/total*100).toFixed(1)}%;width:${((e-s)/total*100).toFixed(1)}%;background:${col};height:12px;border-radius:2px;display:flex;align-items:center;padding:0 4px;min-width:4px">
-            <span style="font-size:8px;color:rgba(255,255,255,.9);font-family:monospace;white-space:nowrap">${e-s}d</span>
+          <div style="margin-left:${(s/total*100).toFixed(1)}%;width:${((e-s)/total*100).toFixed(1)}%;background:${col};height:12px;border-radius:2px;min-width:4px;display:flex;align-items:center;padding:0 4px">
+            <span style="font-size:8px;color:rgba(255,255,255,.9);font-family:monospace">${e-s}d</span>
           </div>
         </td></tr>`;
     });
   });
 
-  // PERT HTML
-  let pertRows='', cpSum=0, cpVar=0;
+  let pertRows='',cpSum=0,cpVar=0;
   p.pert.forEach(entry=>{
     const task=getTask(entry.taskId);
-    const te=(entry.a+4*entry.m+entry.b)/6;
-    const va=Math.pow((entry.b-entry.a)/6,2);
-    const isCP=task&&task.cp;
-    if(isCP){cpSum+=te;cpVar+=va;}
+    const te=(entry.a+4*entry.m+entry.b)/6,va=Math.pow((entry.b-entry.a)/6,2);
+    const isCP=task&&task.cp;if(isCP){cpSum+=te;cpVar+=va;}
     pertRows+=`<tr style="${isCP?'background:#f0f5ff':''}">
       <td style="padding:5px 8px;font-size:10px;border-bottom:1px solid #eee">${task?escHtml(task.name):'(deleted)'}</td>
       <td style="padding:5px 8px;font-family:monospace;text-align:center;font-size:10px;border-bottom:1px solid #eee">${entry.a}</td>
@@ -916,66 +1042,51 @@ function exportPDF(){
   const sd=Math.sqrt(cpVar);
 
   const win=window.open('','_blank');
-  win.document.write(`<!DOCTYPE html><html><head><meta charset="UTF-8">
-  <title>${escHtml(p.name)} — Project Summary</title>
-  <style>
-    body{font-family:'Segoe UI',Arial,sans-serif;color:#1a1a1a;padding:32px;max-width:960px;margin:0 auto}
-    h1{font-size:22px;font-weight:700;margin-bottom:4px}
-    h2{font-size:14px;font-weight:600;color:#1a56db;margin:28px 0 10px;padding-bottom:5px;border-bottom:2px solid #e0e7ff;text-transform:uppercase;letter-spacing:.05em}
-    .meta{font-size:11px;color:#666;margin-bottom:20px}
-    .stat-row{display:flex;gap:16px;margin-bottom:24px}
-    .stat{background:#f5f7fa;border:1px solid #e0e4eb;border-radius:6px;padding:10px 16px;text-align:center;flex:1}
-    .stat-v{font-size:22px;font-weight:700;font-family:monospace}
-    .stat-l{font-size:9px;color:#666;text-transform:uppercase;letter-spacing:.05em;margin-top:2px}
-    .prog-bar{height:8px;border-radius:4px;background:#e5e7eb;overflow:hidden;margin:10px 0}
-    .prog-fill{height:100%;background:linear-gradient(90deg,#1a56db,#0ea47a);border-radius:4px}
-    table{width:100%;border-collapse:collapse}
-    th{background:#f0f4ff;color:#374151;font-size:10px;padding:7px 8px;text-align:left;font-weight:600;border-bottom:1px solid #d1d5db}
-    .formula{background:#f5f7fa;border:1px solid #e0e4eb;border-radius:4px;padding:8px 12px;font-family:monospace;font-size:10px;color:#374151;margin:8px 0}
-    .result-row{display:flex;gap:12px;margin:12px 0}
-    .result-box{flex:1;background:#f0f5ff;border:1px solid #c7d7f8;border-radius:6px;padding:10px;text-align:center}
-    .result-v{font-size:18px;font-weight:700;font-family:monospace;color:#1a56db}
-    .result-l{font-size:9px;color:#666;margin-top:2px}
-    @media print{@page{margin:20px} button{display:none}}
-  </style>
+  win.document.write(`<!DOCTYPE html><html><head><meta charset="UTF-8"><title>${escHtml(p.name)} — Summary</title>
+  <style>body{font-family:'Segoe UI',Arial,sans-serif;color:#1a1a1a;padding:32px;max-width:960px;margin:0 auto}
+  h1{font-size:22px;font-weight:700;margin-bottom:4px}h2{font-size:14px;font-weight:600;color:#1a56db;margin:28px 0 10px;padding-bottom:5px;border-bottom:2px solid #e0e7ff;text-transform:uppercase;letter-spacing:.05em}
+  .meta{font-size:11px;color:#666;margin-bottom:20px}.stat-row{display:flex;gap:16px;margin-bottom:24px}
+  .stat{background:#f5f7fa;border:1px solid #e0e4eb;border-radius:6px;padding:10px 16px;text-align:center;flex:1}
+  .stat-v{font-size:22px;font-weight:700;font-family:monospace}.stat-l{font-size:9px;color:#666;text-transform:uppercase;letter-spacing:.05em;margin-top:2px}
+  .prog-bar{height:8px;border-radius:4px;background:#e5e7eb;overflow:hidden;margin:10px 0}
+  .prog-fill{height:100%;background:linear-gradient(90deg,#1a56db,#0ea47a);border-radius:4px}
+  table{width:100%;border-collapse:collapse}th{background:#f0f4ff;color:#374151;font-size:10px;padding:7px 8px;text-align:left;font-weight:600;border-bottom:1px solid #d1d5db}
+  .formula{background:#f5f7fa;border:1px solid #e0e4eb;border-radius:4px;padding:8px 12px;font-family:monospace;font-size:10px;color:#374151;margin:8px 0}
+  .result-row{display:flex;gap:12px;margin:12px 0}.result-box{flex:1;background:#f0f5ff;border:1px solid #c7d7f8;border-radius:6px;padding:10px;text-align:center}
+  .result-v{font-size:18px;font-weight:700;font-family:monospace;color:#1a56db}.result-l{font-size:9px;color:#666;margin-top:2px}
+  @media print{@page{margin:20px}button{display:none}}</style>
   </head><body>
   <div style="display:flex;align-items:flex-start;justify-content:space-between">
-    <div><h1>${escHtml(p.name)}</h1><div class="meta">Generated ${new Date().toLocaleDateString('en-GB',{year:'numeric',month:'long',day:'numeric'})} · PLAN/ project planner</div></div>
+    <div><h1>${escHtml(p.name)}</h1><div class="meta">Generated ${new Date().toLocaleDateString('en-GB',{year:'numeric',month:'long',day:'numeric'})} · PLAN/ project planner${p.startDate?' · Start: '+fmtDate(new Date(p.startDate)):''}</div></div>
     <button onclick="window.print()" style="padding:8px 18px;background:#1a56db;color:#fff;border:none;border-radius:5px;cursor:pointer;font-size:12px">🖨 Print / Save PDF</button>
   </div>
   <div class="stat-row">
-    <div class="stat"><div class="stat-v">${p.tasks.length}</div><div class="stat-l">Total tasks</div></div>
+    <div class="stat"><div class="stat-v">${p.tasks.length}</div><div class="stat-l">Tasks</div></div>
     <div class="stat"><div class="stat-v">${p.phases.length}</div><div class="stat-l">Phases</div></div>
-    <div class="stat"><div class="stat-v">${total}</div><div class="stat-l">Duration (CPM days)</div></div>
+    <div class="stat"><div class="stat-v">${total}</div><div class="stat-l">Working days</div></div>
     <div class="stat"><div class="stat-v">${progress}%</div><div class="stat-l">Complete</div></div>
   </div>
   <div class="prog-bar"><div class="prog-fill" style="width:${progress}%"></div></div>
-
-  <h2>Work breakdown structure</h2>
-  ${wbsHtml}
-
-  <h2>Gantt chart — CPM schedule</h2>
+  <h2>Work breakdown structure</h2>${wbsHtml}
+  <h2>Gantt chart</h2>
   <div style="overflow-x:auto"><table><thead><tr><th style="width:180px">Task</th><th>Timeline (${total} days total)</th></tr></thead><tbody>${ganttRows}</tbody></table></div>
-
   <h2>PERT analysis</h2>
-  <div class="formula">tₑ = (a + 4m + b) / 6 &nbsp;·&nbsp; σ² = ((b−a)/6)²</div>
+  <div class="formula">tₑ = (a + 4m + b) / 6 · σ² = ((b−a)/6)²</div>
   <table><thead><tr><th>Activity</th><th>a</th><th>m</th><th>b</th><th>tₑ</th><th>σ²</th><th>CP</th></tr></thead><tbody>${pertRows}</tbody></table>
   <div class="result-row">
-    <div class="result-box"><div class="result-v">${cpSum.toFixed(1)}</div><div class="result-l">Expected CP duration (days)</div></div>
+    <div class="result-box"><div class="result-v">${cpSum.toFixed(1)}</div><div class="result-l">Expected CP duration</div></div>
     <div class="result-box"><div class="result-v">${cpVar.toFixed(2)}</div><div class="result-l">Total variance σ²</div></div>
     <div class="result-box"><div class="result-v">${sd.toFixed(2)}</div><div class="result-l">Std deviation σ</div></div>
   </div>
-  <p style="font-size:10px;color:#888;margin-top:8px">50% chance of finishing by day ${cpSum.toFixed(1)} · 84% by day ${(cpSum+sd).toFixed(1)} · 97.7% by day ${(cpSum+2*sd).toFixed(1)}</p>
-  </body></html>`);
-  win.document.close();
+  <p style="font-size:10px;color:#888;margin-top:8px">50% finish by day ${cpSum.toFixed(1)} · 84% by day ${(cpSum+sd).toFixed(1)} · 97.7% by day ${(cpSum+2*sd).toFixed(1)}</p>
+  </body></html>`);win.document.close();
 }
 
-// ── MODALS ────────────────────────────────────────────────────────────────────
+// ── UTILS ─────────────────────────────────────────────────────────────────────
 function openModal(id){document.getElementById(id).classList.add('open');}
 function closeModal(id){document.getElementById(id).classList.remove('open');}
 document.addEventListener('keydown',e=>{if(e.key==='Escape')document.querySelectorAll('.overlay.open').forEach(o=>o.classList.remove('open'));});
 document.querySelectorAll('.overlay').forEach(el=>el.addEventListener('click',e=>{if(e.target===el)el.classList.remove('open');}));
-
 function escHtml(s){return String(s||'').replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;');}
 
 // ── INIT ──────────────────────────────────────────────────────────────────────
